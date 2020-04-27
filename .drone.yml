@@ -1,0 +1,25 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: 使用 cloud.drone.io 部署 Nginx 到私人伺服器
+    image: appleboy/drone-ssh
+    settings:
+      host: 
+        from_secret: ssh_host
+      environment:
+        - DEBUG=true
+      username: 
+        from_secret: ssh_username
+      password: 
+        from_secret: ssh_password
+      port: 22
+      envs: [ DEFAULT_EMAIL ]
+      script:
+        - rm -rf docker-nginx
+        - git clone git@github.com:a65162/docker-nginx.git
+        - cd docker-nginx
+        - docker-compose down
+        - DEFAULT_EMAIL=$DEFAULT_EMAIL
+        - docker-compose up -d
