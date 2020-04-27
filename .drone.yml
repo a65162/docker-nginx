@@ -22,4 +22,7 @@ steps:
         - cd docker-nginx
         - docker-compose down
         - DEFAULT_EMAIL=$DEFAULT_EMAIL
+        - echo $DEFAULT_EMAIL
+        - echo ${DEFAULT_EMAIL}
+        - echo $${DEFAULT_EMAIL}
         - docker-compose up -d
