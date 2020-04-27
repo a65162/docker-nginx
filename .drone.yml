@@ -15,8 +15,11 @@ steps:
       password: 
         from_secret: ssh_password
       port: 22
+      environment:
+        DEFAULT_EMAIL:
+          from_secret: DEFAULT_EMAIL
       envs:
-        - default_email
+        - DEFAULT_EMAIL
       script:
         - rm -rf docker-nginx
         - git clone git@github.com:a65162/docker-nginx.git
