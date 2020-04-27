@@ -16,13 +16,13 @@ steps:
         from_secret: ssh_password
       port: 22
       envs:
-        - DEFAULT_EMAIL
+        - default_email
       script:
         - rm -rf docker-nginx
         - git clone git@github.com:a65162/docker-nginx.git
         - cd docker-nginx
         - docker-compose down
-        - DEFAULT_EMAIL=$DEFAULT_EMAIL
+        - export DEFAULT_EMAIL=$DEFAULT_EMAIL
         - echo $DEFAULT_EMAIL
         - echo ${DEFAULT_EMAIL}
         - echo $${DEFAULT_EMAIL}
