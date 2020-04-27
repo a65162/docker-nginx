@@ -5,6 +5,10 @@ name: default
 steps:
   - name: 使用 cloud.drone.io 部署 Nginx 到私人伺服器
     image: appleboy/drone-ssh
+    environment:
+        DEFAULT_EMAIL1: test
+        DEFAULT_EMAIL:
+          from_secret: DEFAULT_EMAIL
     settings:
       host: 
         from_secret: ssh_host
@@ -15,13 +19,7 @@ steps:
       password: 
         from_secret: ssh_password
       port: 22
-      environment:
-        DEFAULT_EMAIL1: test
-        DEFAULT_EMAIL:
-          from_secret: DEFAULT_EMAIL
-      envs:
-        - DEFAULT_EMAIL
-        - DEFAULT_EMAIL1
+      envs: [DEFAULT_EMAIL, DEFAULT_EMAIL1]
       script:
         - rm -rf docker-nginx
         - git clone git@github.com:a65162/docker-nginx.git
